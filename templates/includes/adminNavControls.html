@@ -1,0 +1,73 @@
+{% if session["user"]["accountType"] == "admin" %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for("adminStats.dashboard") }}">Dashboard</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Users
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminUsers.viewAllUsers") }}"><span class="material-icons me-1">groups</span>View All Users</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminUsers.addUser") }}"><span class="material-icons me-1">person_add</span>Create User</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminEnquiry.viewAllEnquiries") }}"><span class="material-icons me-1">feedback</span>View Enquiries</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Shop
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminOrders.viewAllOrders") }}"><span class="material-icons me-1">shopping_cart</span>View All Orders</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminRefund.viewAllRefunds") }}"><span class="material-icons me-1">currency_exchange</span>View Refund Requests</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminProducts.viewAllProducts") }}"><span class="material-icons me-1">inventory_2</span>View All Products</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminProducts.addProduct") }}"><span class="material-icons me-1">library_add</span>Create New Product</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminTreatments.viewAllTreatments") }}"><span class="material-icons me-1">medical_services</span>View All Treatments</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminTreatments.addTreatment") }}"><span class="material-icons me-1">library_add</span>Create New Treatment</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminCoupons.viewAllCoupons") }}"><span class="material-icons me-1">discount</span>View All Coupons</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminCoupons.addCoupon") }}"><span class="material-icons me-1">new_label</span>Create New Coupon</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Appointments
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminAppointments.viewAllAppointments") }}"><span class="material-icons me-1">event</span>View Your Appointments</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminAppointments.addAppointment") }}"><span class="material-icons me-1">edit_calendar</span>Create New Appointment</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminAppointments.editOpeningHours") }}"><span class="material-icons me-1">schedule</span>Edit Opening Hours</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminBlog.viewAllBlogs") }}"><span class="material-icons me-1">feed</span>View All Articles</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminBlog.addBlog") }}"><span class="material-icons me-1">post_add</span>Create New Article</a></li>
+        </ul>
+    </li>
+{% else %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Orders
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminOrders.viewAllOrders") }}"><span class="material-icons me-1">shopping_cart</span>View All Orders</a></li>
+        </ul>
+    </li>
+{% endif %}
