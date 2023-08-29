@@ -34,9 +34,6 @@ def allowedFile(filename):
 def normalAccess(func):
     @wraps(func)
     def wrapper_func(*args, **kwargs):
-        if "user" in session:
-            session["cartAmount"] = checkCart()
-
         return func(*args, **kwargs)
 
     return wrapper_func
@@ -62,7 +59,6 @@ def loginAccess(func):
             flash("You need to login to access the page.")
             return redirect(url_for("auth.login"))
         else:
-            session["cartAmount"] = checkCart()
             return func(*args, **kwargs)
 
     return wrapper_func
@@ -90,7 +86,6 @@ def deliveryAccess(func):
             flash("Not allowed! Authorised users only.", category="error")
             return goBack()
         else:
-            session["cartAmount"] = checkCart()
             return func(*args, **kwargs)
 
     return wrapper_func
@@ -110,22 +105,6 @@ def adminAccess(func):
             return func(*args, **kwargs)
 
     return wrapper_func
-
-
-def checkCoupon(couponCode):
-    with shelve.open("coupons") as coupons:
-        for coupon in coupons.values():
-            if coupon.getCode() == couponCode and coupon.isValid():
-                return True
-
-        return False
-
-
-def checkCart():
-    if "user" in session:
-        with shelve.open("users", writeback=True) as users:
-            user = users[session["user"]["email"]]
-            return len(user.getCart())
 
 
 def convertHoursToTime(hours):
