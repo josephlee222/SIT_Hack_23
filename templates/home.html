@@ -6,9 +6,59 @@
 {% block nav %}
     {{ normalNavControls.normalNavControls(1) }}
 {% endblock %}
-
+{% block fluidContent %}
+    <div class="row align-items-center main-splash">
+        <div class="col-12">
+            <div class="container">
+                <div class="row align-items-center my-5">
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/stress.png') }}" class="w-100">
+                    </div>
+                    <div class="col-md-8">
+                        <h1 class="display-6">Tired? Stressed? or just want someone to talk to?</h1>
+                        <h2 class="h5">Connect with our volunteer councillors today.</h2>
+                        <a href="{{ url_for("home") }}"><button class="btn custom-btn">Connect Now</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block content %}
-    <div class="row mt-3">
-        Test
+    <div class="row align-items-center my-3">
+        <div class="card white">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-6">Be in control of your mental health</h1>
+                        <h2 class="h5">Check out resources on our website to learn more about managing your mental
+                            health</h2>
+                        <a href="{{ url_for("home") }}"><button class="btn custom-btn">Learn More</button></a>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/question.png') }}" class="w-100"
+                             style="height: 250px; object-fit: contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="card white">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-6">Help someone today. Make a difference.</h1>
+                        <h2 class="h5">Want to make a difference, take care of yourself and others while increasing your
+                            value?</h2>
+                        <a href="{{ url_for("home") }}"><button class="btn custom-btn">Learn More</button></a>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/communication.png') }}" class="w-100"
+                             style="height: 250px; object-fit: contain">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -3,4 +3,22 @@
     <li class="nav-item">
         <a class="nav-link d-flex align-items-center{% if active == 1 %} active{% endif %}" href="{{ url_for("home") }}"><span class="material-icons navbar-icon me-1">home</span>Home</a>
     </li>
+    {% if session["user"] is defined %}
+            {% if session["user"]["accountType"] == "customer" %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center{% if active == 2 %} active{% endif %}" href="{{ url_for("home") }}"><span class="material-icons navbar-icon me-1">settings_ethernet</span>Connect</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center{% if active == 3 %} active{% endif %}" href="{{ url_for("home") }}"><span class="material-icons navbar-icon me-1">flag</span>Guides</a>
+                </li>
+            {% endif %}
+            {% if session["user"]["accountType"] == "council" %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center{% if active == 2 %} active{% endif %}" href="{{ url_for("home") }}"><span class="material-icons navbar-icon me-1">settings_ethernet</span>Connect</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center{% if active == 3 %} active{% endif %}" href="{{ url_for("home") }}"><span class="material-icons navbar-icon me-1">school</span>EPA</a>
+                </li>
+            {% endif %}
+        {% endif %}
 {% endmacro %}

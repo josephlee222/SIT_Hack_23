@@ -16,6 +16,9 @@ class User:
         self.birthday = birthday
         self.phone = phone
         self.address = []
+        self.hours = 0
+        self.timeRange = []
+        self.cert = []
 
     def getName(self):
         return self.name
@@ -41,6 +44,12 @@ class User:
     def getMedications(self):
         return self.medications
 
+    def getHours(self):
+        return self.hours
+
+    def getCert(self):
+        return self.cert
+
     def setPassword(self, password):
         self.password = password
 
@@ -55,6 +64,12 @@ class User:
 
     def setPhone(self, phone):
         self.phone = phone
+
+    def setHours(self, hours):
+        self.hours = hours
+
+    def setCert(self, cert):
+        self.cert = cert
 
     # ONLY PASS IN ADDRESS CLASSES HERE, NO TEXT
     def setAddress(self, address):

@@ -167,9 +167,9 @@ class addUserForm(Form):
                           message="Phone number must a number that starts with the number 6, 8 or 9 and 8 digits long")
     ])
     accountType = RadioField("Account Type", choices=[
-        ("customer", "Customer Account"),
+        ("customer", "Normal Account"),
         ("admin", "Doctor/Staff Account"),
-        ("delivery", "Delivery Partner Account")
+        ("council", "Councillor Account")
     ], validators=[
         validators.DataRequired("Account type is required")
     ])

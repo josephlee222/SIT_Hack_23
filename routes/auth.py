@@ -7,6 +7,7 @@ import jwt
 from flask import flash, Blueprint, render_template, request, session, redirect, url_for
 from flask_mail import Message
 
+import app
 from classes.User import User
 from forms import loginUserForm, registerUserForm, resetPasswordForm, changeUserPasswordForm
 from functions import flashFormErrors, goBack, unloginAccess
