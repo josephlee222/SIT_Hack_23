@@ -185,6 +185,31 @@ class addUserForm(Form):
             raise ValidationError("Invalid birthday, date cannot be in the future")
 
 
+class addEpaForm(Form):
+    name = StringField("EPA Name", [
+        validators.DataRequired(message="EPA Name is required")
+    ])
+    description = TextAreaField("Description", [
+        validators.Length(20, 1024, message="EPA Description must range from 20-1024 characters"),
+        validators.DataRequired(message="Description is required")
+    ])
+    duration = IntegerField("Duration", [
+        validators.NumberRange(1, 12, "Duration must be a range between 1 to 12 hours"),
+        validators.DataRequired(message="Duration is required")
+    ])
+    location = StringField("Location", [
+        validators.DataRequired(message="EPA location is required")
+    ])
+    mode = RadioField("EPA Mode", choices=[
+        ("Virtual", "Virtual Learning"),
+        ("Hybrid", "Hybrid"),
+        ("Physical", "Physical Meeting")
+    ], validators=[
+        validators.DataRequired("EPA course mode is required")
+    ])
+    submit = SubmitField("Create EPA")
+
+
 class addAddressForm(Form):
     name = StringField("Address Name", [
         validators.Length(1, 64, message="Address name must be between 1 to 64 characters"),

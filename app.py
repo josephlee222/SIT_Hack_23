@@ -5,17 +5,16 @@ from datetime import time, datetime
 from dotenv.main import load_dotenv
 from flask import Flask, render_template, session, url_for, make_response, send_from_directory
 from flask_mail import Mail
-from flask_sqlalchemy import SQLAlchemy
 
 from classes.User import User
 from functions import normalAccess
 from routes.adminUsers import adminUsers
+from routes.adminEpas import adminEpas
 from routes.auth import auth
 from routes.errors import errors
 from routes.profile import profile
 from routes.test import test
 
-db = SQLAlchemy()
 app = Flask(__name__)
 app.secret_key = "aNDu7jhy1wKBP7y17j0o"
 load_dotenv()
@@ -30,15 +29,14 @@ app.config['MAIL_USERNAME'] = os.environ["MAIL_USERNAME"]
 app.config['MAIL_PASSWORD'] = os.environ["MAIL_PASSWORD"]
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 
 mail = Mail(app)
-db.init_app(app)
 
 # Register blueprints
 app.register_blueprint(test)
 app.register_blueprint(auth)
 app.register_blueprint(adminUsers)
+app.register_blueprint(adminEpas)
 app.register_blueprint(profile)
 app.register_blueprint(errors)
 

@@ -8,4 +8,13 @@
             <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminUsers.addUser") }}"><span class="material-icons me-1">person_add</span>Create User</a></li>
         </ul>
     </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            EPAs
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminEpas.viewAllEpas") }}"><span class="material-icons me-1">school</span>View All EPAs</a></li>
+            <li><a class="dropdown-item d-flex align-items-center" href="{{ url_for("adminEpas.addEpa") }}"><span class="material-icons me-1">add</span>Create EPA</a></li>
+        </ul>
+    </li>
 {% endif %}

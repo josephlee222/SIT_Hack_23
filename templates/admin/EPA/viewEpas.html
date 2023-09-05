@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}All EPAs{% endblock %}
+{% block nav %}
+    {% include "includes/adminNavControls.html" %}
+{% endblock %}
+{% block navRight %}
+    {% include "includes/userControls.html" %}
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/datatables.css') }}"/>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.2/r-2.4.0/datatables.min.js"></script>
+{% endblock %}
+{% block content %}
+    <div class="d-flex align-items-center mb-4">
+        <span class="material-icons me-3" style="font-size: 60px">school</span>
+        <div>
+            <h1>View EPAs</h1>
+            <h6 class="m-0">View All available EPAs</h6>
+        </div>
+    </div>
+    <a href="{{ url_for("adminEpas.addEpa") }}">
+        <button class="btn custom-btn mb-3">Create EPA</button>
+    </a>
+    <div class="row overflow-auto">
+        <div class="col-12">
+            <table class="table table-striped w-100" id="users">
+                <thead>
+                <th>EPA Name</th>
+                <th>Duration</th>
+                <th>Mode</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                {% for epa in epas %}
+                    <tr>
+                        <td>{{ epas[epa]["name"] }}</td>
+                        <td>{{ epas[epa]["duration"] }}</td>
+                        <td>{{ epas[epa]["mode"] }}</td>
+                        <td class="text-nowrap">
+                            <a href="{{ url_for("home", id=epas[epa]["id"]) }}"><button class="btn custom-btn">Edit</button></a>
+                            <a href="{{ url_for("home", email=epas[epa]["id"]) }}"><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#users').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+{% endblock %}
