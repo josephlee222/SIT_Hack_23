@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}
-    View PFAs
+    View Available Counsellors
 {% endblock %}
 {% block nav %}
-    {{ normalNavControls.normalNavControls(3) }}
+    {{ normalNavControls.normalNavControls(2) }}
 {% endblock %}
 {% block navRight %}
     {% include "includes/userControls.html" %}
@@ -13,15 +13,15 @@
         <div class="col-12">
             <div class="container">
                 <div class="d-flex align-items-center mb-4">
-                    <span class="material-icons me-3" style="font-size: 60px">school</span>
+                    <span class="material-icons me-3" style="font-size: 60px">settings_ethernet</span>
                     <div>
-                        <h1 class="display-6">Certifications</h1>
-                        <h6 class="m-0">View available certifications</h6>
+                        <h1 class="display-6">Connect</h1>
+                        <h6 class="m-0">Connect with a volunteer counsellor</h6>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <p>Employee Mental Health is important. With various certifications available, you can help yourself and others go through tough times at work.</p>
+                    <p>Talk and connect to one of our volunteers today.</p>
                 </div>
             </div>
         </div>
@@ -29,20 +29,20 @@
 {% endblock %}
 {% block content %}
     <div class="row">
-        {% for epa in epas %}
+        {% for user in userList %}
             <div class="col-md-6">
                 <div class="card white">
                     <div class="card-body">
-                        <h5 class="card-title">{{ epas[epa]["name"] }}</h5>
+                        <h5 class="card-title">{{ userList[user].name }}</h5>
                         <div class="row">
                             <div class="col-md-6">
-                                {{ infoBox.infoBox("Mode", epas[epa]["mode"]) }}
+                                {{ infoBox.infoBox("Available Time", "Not set") }}
                             </div>
                             <div class="col-md-6">
-                                {{ infoBox.infoBox("Duration", epas[epa]["duration"]|string + " Hours") }}
+                                {{ infoBox.infoBox("Experience", userList[user].hours|string + " hours") }}
                             </div>
                         </div>
-                        <a href="{{ url_for("epas.viewEpa", id=epas[epa]["id"]) }}"><button class="btn custom-btn">More Details</button></a>
+                        <a href="{{ url_for("home") }}"><button class="btn custom-btn">Connect</button></a>
                     </div>
                 </div>
             </div>

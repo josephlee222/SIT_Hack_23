@@ -283,3 +283,12 @@ class editArticleForm(FlaskForm):
     ])
 
     submit = SubmitField("Save")
+
+class connectionForm(Form):
+    councilId = StringField("Counsellor E-mail", [
+        validators.DataRequired(message="Message is required")
+    ])
+    message = StringField("Message", [
+        validators.Length(3, 64, message="Message must be between 3 to 64 characters"),
+        validators.DataRequired(message="Message is required")
+    ])

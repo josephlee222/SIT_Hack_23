@@ -16,6 +16,7 @@ from routes.auth import auth
 from routes.errors import errors
 from routes.profile import profile
 from routes.epas import epas
+from routes.connect import connect
 from routes.test import test
 
 app = Flask(__name__)
@@ -42,6 +43,7 @@ app.register_blueprint(adminUsers)
 app.register_blueprint(adminEpas)
 app.register_blueprint(adminBlog)
 app.register_blueprint(blogs)
+app.register_blueprint(connect)
 app.register_blueprint(profile)
 app.register_blueprint(epas)
 app.register_blueprint(errors)

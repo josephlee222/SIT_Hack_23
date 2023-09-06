@@ -1,7 +1,5 @@
 import shelve
-
 from flask import flash, Blueprint, render_template, redirect, url_for
-
 from functions import normalAccess
 
 blogs = Blueprint("blogs", __name__)
