@@ -252,6 +252,16 @@ a.white:hover {
     background-color: var(--primary-colour);
 }
 
+.new-title {
+    background-color: var(--primary-colour);
+    padding-top: 1rem;
+
+}
+
+.new-title, .new-title * {
+    color: white;
+}
+
 .login-card-img {
     background-image: url("/static/img/main_background.webp");
     background-size: cover;

@@ -28,7 +28,7 @@ def addEpa():
         with shelve.open("epas") as epas:
             epas[str(epa.id)] = epa
             flash("EPA successfully created", category="success")
-            redirect("adminEpas.viewAllEpas")
+            redirect(url_for("adminEpas.viewAllEpas"))
     else:
         flashFormErrors("Unable to create the EPA", form.errors)
 

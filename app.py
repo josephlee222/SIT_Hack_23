@@ -10,9 +10,12 @@ from classes.User import User
 from functions import normalAccess
 from routes.adminUsers import adminUsers
 from routes.adminEpas import adminEpas
+from routes.adminBlog import adminBlog
+from routes.blog import blogs
 from routes.auth import auth
 from routes.errors import errors
 from routes.profile import profile
+from routes.epas import epas
 from routes.test import test
 
 app = Flask(__name__)
@@ -37,7 +40,10 @@ app.register_blueprint(test)
 app.register_blueprint(auth)
 app.register_blueprint(adminUsers)
 app.register_blueprint(adminEpas)
+app.register_blueprint(adminBlog)
+app.register_blueprint(blogs)
 app.register_blueprint(profile)
+app.register_blueprint(epas)
 app.register_blueprint(errors)
 
 
