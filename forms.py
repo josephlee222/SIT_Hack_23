@@ -232,7 +232,6 @@ class editAddressForm(Form):
         validators.Length(16, 256, message="Location must be between 16 to 256 characters"),
         validators.DataRequired(message="Location is required")
     ])
-
     submit = SubmitField("Edit Address")
 
 
@@ -243,3 +242,12 @@ class deleteUserForm(Form):
     ])
 
     submit = SubmitField("Confirm Delete")
+
+class feedbackForm(Form):
+    experience_details = TextAreaField("experience_details", [
+        validators.Length(20, 1024, message="Experience Feedback Details must range from 20-1024 characters"),
+        validators.DataRequired(message="Feedback is required")
+    ])
+    comments =  TextAreaField("comments", [
+        validators.Length(20, 1024, message="comments must range from 20-1024 characters"),
+    ])
