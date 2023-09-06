@@ -14,6 +14,7 @@ from routes.auth import auth
 from routes.errors import errors
 from routes.profile import profile
 from routes.test import test
+from routes.feedback import feedback
 
 app = Flask(__name__)
 app.secret_key = "aNDu7jhy1wKBP7y17j0o"
@@ -39,6 +40,7 @@ app.register_blueprint(adminUsers)
 app.register_blueprint(adminEpas)
 app.register_blueprint(profile)
 app.register_blueprint(errors)
+app.register_blueprint(feedback)
 
 
 # ONLY HOMEPAGE HERE (Other pages please use separate files and link via blueprint)

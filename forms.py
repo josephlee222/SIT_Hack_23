@@ -243,3 +243,13 @@ class deleteUserForm(Form):
     ])
 
     submit = SubmitField("Confirm Delete")
+
+class feedbackForm(Form):
+    experience_details =  description = TextAreaField("experience_details", [
+        validators.Length(20, 1024, message="Experience Feedpack Details must range from 20-1024 characters"),
+        validators.DataRequired(message="Experience Feedpack Details is required")
+    ])
+
+    comments =  description = TextAreaField("comments", [
+        validators.Length(20, 1024, message="Experience Feedpack Details must range from 20-1024 characters"),
+    ])
