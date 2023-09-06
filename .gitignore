@@ -1,2 +1,11 @@
 
 .env
+data.bak
+data.dat
+data.dir
+products.bak
+products.dat
+products.dir
+users.bak
+users.dat
+users.dir

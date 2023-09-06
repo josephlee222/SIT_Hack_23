@@ -293,6 +293,14 @@ class connectionForm(Form):
     ])
 
 class feedbackForm(Form):
+    q1 = IntegerField("q1", [
+        validators.NumberRange(1, 5, "Rating must be a range between 1 to 12 hours"),
+        validators.DataRequired(message="Rating is required")
+    ])
+    q2 = IntegerField("q2", [
+        validators.NumberRange(1, 5, "Rating must be a range between 1 to 12 hours"),
+        validators.DataRequired(message="Rating is required")
+    ])
     experience_details = TextAreaField("experience_details", [
         validators.Length(20, 1024, message="Experience Feedback Details must range from 20-1024 characters"),
         validators.DataRequired(message="Feedback is required")
