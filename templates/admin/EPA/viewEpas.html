@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}All EPAs{% endblock %}
+{% block title %}All PFAs{% endblock %}
 {% block nav %}
     {% include "includes/adminNavControls.html" %}
 {% endblock %}
@@ -15,18 +15,18 @@
     <div class="d-flex align-items-center mb-4">
         <span class="material-icons me-3" style="font-size: 60px">school</span>
         <div>
-            <h1>View EPAs</h1>
-            <h6 class="m-0">View All available EPAs</h6>
+            <h1>View PFAs</h1>
+            <h6 class="m-0">View All available PFAs</h6>
         </div>
     </div>
     <a href="{{ url_for("adminEpas.addEpa") }}">
-        <button class="btn custom-btn mb-3">Create EPA</button>
+        <button class="btn custom-btn mb-3">Create PFA</button>
     </a>
     <div class="row overflow-auto">
         <div class="col-12">
             <table class="table table-striped w-100" id="users">
                 <thead>
-                <th>EPA Name</th>
+                <th>PFA Name</th>
                 <th>Duration</th>
                 <th>Mode</th>
                 <th>Actions</th>

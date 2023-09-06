@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    Add EPA
+    Add PFA
 {% endblock %}
 {% block nav %}
     {% include "includes/adminNavControls.html" %}
@@ -12,14 +12,14 @@
     <div class="d-flex align-items-center mb-4">
         <span class="material-icons me-3" style="font-size: 60px">add</span>
         <div>
-            <h1>Add EPA</h1>
-            <h6 class="m-0">Add a new EPA</h6>
+            <h1>Add PFA</h1>
+            <h6 class="m-0">Add a new PFA</h6>
         </div>
     </div>
     <form method="post">
         <div class="row">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2 class="h4">EPA Information</h2>
+                <h2 class="h4">PFA Information</h2>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         {{ formHelper.renderField(form.name) }}

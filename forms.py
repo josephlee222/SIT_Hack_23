@@ -186,11 +186,11 @@ class addUserForm(Form):
 
 
 class addEpaForm(Form):
-    name = StringField("EPA Name", [
-        validators.DataRequired(message="EPA Name is required")
+    name = StringField("PFA Name", [
+        validators.DataRequired(message="PFA Name is required")
     ])
     description = TextAreaField("Description", [
-        validators.Length(20, 1024, message="EPA Description must range from 20-1024 characters"),
+        validators.Length(20, 1024, message="PFA Description must range from 20-1024 characters"),
         validators.DataRequired(message="Description is required")
     ])
     duration = IntegerField("Duration", [
@@ -198,16 +198,16 @@ class addEpaForm(Form):
         validators.DataRequired(message="Duration is required")
     ])
     location = StringField("Location", [
-        validators.DataRequired(message="EPA location is required")
+        validators.DataRequired(message="PFA location is required")
     ])
-    mode = RadioField("EPA Mode", choices=[
+    mode = RadioField("PFA Mode", choices=[
         ("Virtual", "Virtual Learning"),
         ("Hybrid", "Hybrid"),
         ("Physical", "Physical Meeting")
     ], validators=[
-        validators.DataRequired("EPA course mode is required")
+        validators.DataRequired("PFA course mode is required")
     ])
-    submit = SubmitField("Create EPA")
+    submit = SubmitField("Create PFA")
 
 
 class addAddressForm(Form):
@@ -243,13 +243,3 @@ class deleteUserForm(Form):
     ])
 
     submit = SubmitField("Confirm Delete")
-
-class feedbackForm(Form):
-    experience_details =  description = TextAreaField("experience_details", [
-        validators.Length(20, 1024, message="Experience Feedpack Details must range from 20-1024 characters"),
-        validators.DataRequired(message="Experience Feedpack Details is required")
-    ])
-
-    comments =  description = TextAreaField("comments", [
-        validators.Length(20, 1024, message="Experience Feedpack Details must range from 20-1024 characters"),
-    ])

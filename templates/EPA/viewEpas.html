@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+    View PFAs
+{% endblock %}
+{% block nav %}
+    {{ normalNavControls.normalNavControls(3) }}
+{% endblock %}
+{% block navRight %}
+    {% include "includes/userControls.html" %}
+{% endblock %}
+{% block fluidContent %}
+    <div class="row new-title">
+        <div class="col-12">
+            <div class="container">
+                <div class="d-flex align-items-center mb-4">
+                    <span class="material-icons me-3" style="font-size: 60px">school</span>
+                    <div>
+                        <h1 class="display-6">View PFAs</h1>
+                        <h6 class="m-0">View available PFAs</h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <p>Employee Mental Health is important. With a PFA Certification, you can help yourself and others go through tough times at work.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        {% for epa in epas %}
+            <div class="col-md-6">
+                <div class="card white">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ epas[epa]["name"] }}</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ infoBox.infoBox("Mode", epas[epa]["mode"]) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ infoBox.infoBox("Duration", epas[epa]["duration"]|string + " Hours") }}
+                            </div>
+                        </div>
+                        <a href="{{ url_for("epas.viewEpa", id=epas[epa]["id"]) }}"><button class="btn custom-btn">More Details</button></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
