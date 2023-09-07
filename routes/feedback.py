@@ -15,6 +15,10 @@ from functions import flashFormErrors, goBack, loginAccess
 
 feedback = Blueprint("feedback", __name__)
 
+# @feedback.route('/feedback/feedback', methods=['GET', 'POST'])
+# @loginAccess
+# def feedbacklist():
+#     with shelve.open()
 @feedback.route('/feedback/feedback/<id>', methods=['GET', 'POST'])
 @loginAccess
 def feedbacks(id):
