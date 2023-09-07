@@ -115,6 +115,9 @@ class editProfileForm(Form):
         validators.regexp("^[689]\d{7}$",
                           message="Phone number must a number that starts with the number 6, 8 or 9 and 8 digits long")
     ])
+    bio = TextAreaField("Introduction Bio", [
+        validators.Optional()
+    ])
 
     submit = SubmitField("Update Profile")
 
@@ -169,7 +172,7 @@ class addUserForm(Form):
     accountType = RadioField("Account Type", choices=[
         ("customer", "Normal Account"),
         ("admin", "Doctor/Staff Account"),
-        ("council", "Councillor Account")
+        ("council", "Counsellor Account")
     ], validators=[
         validators.DataRequired("Account type is required")
     ])
@@ -285,12 +288,14 @@ class editArticleForm(FlaskForm):
 
 class connectionForm(Form):
     councilId = StringField("Counsellor E-mail", [
-        validators.DataRequired(message="Message is required")
+        validators.DataRequired(message="Counsellor E-mail is required")
     ])
-    message = StringField("Message", [
+    message = StringField("Starting Message", [
         validators.Length(3, 64, message="Message must be between 3 to 64 characters"),
         validators.DataRequired(message="Message is required")
     ])
+
+    submit = SubmitField("Start Conversation")
 
 class feedbackForm(Form):
     q1 = IntegerField("q1", [
@@ -308,3 +313,14 @@ class feedbackForm(Form):
     comments = TextAreaField("comments", [
         validators.Length(20, 1024, message="comments must range from 20-1024 characters"),
     ],render_kw={"placeholder": ""})
+
+class chatForm(Form):
+    connectionId = StringField("Connection ID", [
+        validators.DataRequired(message="Connection ID is required")
+    ])
+    message = StringField("Chat Message", [
+        validators.Length(3, 64, message="Message must be between 3 to 64 characters"),
+        validators.DataRequired(message="Message is required")
+    ])
+
+    submit = SubmitField("Send Message")

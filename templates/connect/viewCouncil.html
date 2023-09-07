@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ user.name }}
+{% endblock %}
+{% block nav %}
+    {{ normalNavControls.normalNavControls(2) }}
+{% endblock %}
+{% block navRight %}
+    {% include "includes/userControls.html" %}
+{% endblock %}
+{% block fluidContent %}
+    <div class="row new-title">
+        <div class="col-12">
+            <div class="container">
+                <div class="d-flex align-items-center mb-4">
+                    <span class="material-icons me-3" style="font-size: 60px">settings_ethernet</span>
+                    <div>
+                        <h1 class="display-6">Connect</h1>
+                        <h6 class="m-0">View Counsellor Details</h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <p>Review counsellor details before starting a chat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="card white mb-3 mb-md-0">
+                <div class="card-body">
+                    <h5 class="card-title">Counsellor information</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ infoBox.infoBox("Name", user.name) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ infoBox.infoBox("Certifications", "Not implemented") }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ infoBox.infoBox("Experience", user.hours|string + " Hours") }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ infoBox.infoBox("Current Contacts", count|string + "/3") }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ infoBox.infoBox("Preferred Hours", "Not implemented") }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ infoBox.infoBox("Introductory Bio", user.bio if  user.bio != "" else "Not set") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card white">
+                <div class="card-body">
+                    <h5 class="card-title">Start the conversation</h5>
+                    <form method="post">
+                        <div style="display: none">
+                            {{ formHelper.renderField(form.councilId) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ formHelper.renderField(form.message) }}
+                        </div>
+                        {{ formHelper.renderField(form.submit) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

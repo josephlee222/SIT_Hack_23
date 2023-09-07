@@ -18,7 +18,7 @@
         {% if session["user"]["accountType"] == "council" %}
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center{% if active == 2 %} active{% endif %}"
-                   href="{{ url_for("home") }}"><span class="material-icons navbar-icon me-1">settings_ethernet</span>Connect</a>
+                   href="{{ url_for("connect.viewConnect") }}"><span class="material-icons navbar-icon me-1">settings_ethernet</span>Connect</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center{% if active == 3 %} active{% endif %}"

@@ -8,14 +8,26 @@
 {% block navRight %}
     {% include "includes/userControls.html" %}
 {% endblock %}
-{% block content %}
-    <div class="d-flex align-items-center mb-4">
-        <span class="material-icons me-3" style="font-size: 60px">face</span>
-        <div>
-            <h1>My Profile</h1>
-            <h6 class="m-0">{{ session["user"]["email"] }}</h6>
+{% block fluidContent %}
+    <div class="row new-title">
+        <div class="col-12">
+            <div class="container">
+                <div class="d-flex align-items-center mb-4">
+                    <span class="material-icons me-3" style="font-size: 60px">face</span>
+                    <div>
+                        <h1 class="display-6">My Profile</h1>
+                        <h6 class="m-0">{{ session["user"]["email"] }}</h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <p>View your EasyAid profile</p>
+                </div>
+            </div>
         </div>
     </div>
+{% endblock %}
+{% block content %}
     <div class="row">
         {{ profileControls.profileControls(1) }}
         <div class="col-lg-9">
@@ -24,13 +36,16 @@
                 <a href="{{ url_for("profile.editProfile") }}"><button class="btn custom-btn">Edit Profile</button></a>
             </div>
             <div class="row mb-4">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     {{ infoBox.infoBox("Your Name", user.getName()) }}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                    {{ infoBox.infoBox("Nickname for chats", user.nickname) }}
+                </div>
+                <div class="col-md-6">
                     {{ infoBox.infoBox("Birthday", user.getBirthday().strftime('%d/%m/%Y') if user.getBirthday() else "Not Specified") }}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     {{ infoBox.infoBox("Phone Number", user.getPhone() if user.getPhone() else "Not Specified") }}
                 </div>
                 {{ infoBox.infoBox("E-mail Address", user.getEmail()) }}
