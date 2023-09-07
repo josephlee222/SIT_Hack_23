@@ -3,37 +3,51 @@
     Feedback Form
 {% endblock %}
 {% block nav %}
-    {{ normalNavControls.normalNavControls() }}
+    {{ normalNavControls.normalNavControls(2) }}
 {% endblock %}
 {% block navRight %}
     {% include "includes/userControls.html" %}
 {% endblock %}
+{% block fluidContent %}
+    <div class="row new-title">
+        <div class="col-12">
+            <div class="container">
+                <div class="d-flex align-items-center mb-4">
+                    <span class="material-icons me-3" style="font-size: 60px">reviews</span>
+                    <div>
+                        <h1 class="display-6">Feedback</h1>
+                        <h6 class="m-0">Counsellor feedback form</h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <p>Rate and feedback your experience to your counsellor so they can improve in the future.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block content %}
-<form action="#" method="POST">
-    <p>How did you find your experience with SafeChameleon228?</p>
-    <p>Rate 1-5</p>
-    <div class="d-flex align-items-center feedback-form">
-        {{ formHelper.renderField(form.q1) }}
-    </div>    <br><br>
-
-    <p>How likely are you to recommend SafeChameleon228 to another user?</p>
-    <p>Rate 1-5</p>
-    <div class="d-flex align-items-center feedback-form">
-        {{ formHelper.renderField(form.q2) }}
+    <div class="row">
+        <form method="POST">
+            <div class="">
+                {{ formHelper.renderField(form.q1) }}
+            </div>
+            <br><br>
+            <div class="">
+                {{ formHelper.renderField(form.q2) }}
+            </div>
+            <br><br>
+            <div class="">
+                {{ formHelper.renderField(form.experience_details) }}
+            </div>
+            <br><br>
+            <div class="">
+                {{ formHelper.renderField(form.comments) }}
+            </div>
+            <br><br>
+            {{ formHelper.renderField(form.submit) }}
+        </form>
     </div>
-    <br><br>
 
-    <p>Please provide feedback regarding your experience with SafeChameleon228</p>
-    <div class="d-flex align-items-center feedback-form">
-        {{ formHelper.renderField(form.experience_details) }}
-    </div>
-    <br><br>
-
-    <p>Any comments on the EasyAid platform?</p>
-    <div class="d-flex align-items-center feedback-form">
-        {{ formHelper.renderField(form.comments)}}
-    </div>
-    <br><br>
-    <input type="submit" value="Submit">
-</form>
 {% endblock %}

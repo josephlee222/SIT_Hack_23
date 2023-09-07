@@ -250,3 +250,17 @@ def addUser():
         flashFormErrors("Unable to create the user", form.errors)
 
     return render_template("admin/users/addUser.html", form=form)
+
+
+@adminUsers.route("/admin/users/feedback/<email>", methods=['GET', 'POST'])
+@adminAccess
+def viewFeedbacks(email):
+    feedbackdb = []
+    with shelve.open("feedbacks") as feedbacks:
+        for feedback in feedbacks:
+            if feedbacks[feedback].get_counselloremail() == email:
+                feedbackdb.append(feedbacks[feedback])
+
+    with shelve.open("users") as users:
+        user = users[email]
+    return render_template("admin/users/viewFeedbacks.html", feedbacks=feedbackdb, user=user)

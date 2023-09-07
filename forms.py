@@ -189,11 +189,11 @@ class addUserForm(Form):
 
 
 class addEpaForm(Form):
-    name = StringField("PFA Name", [
-        validators.DataRequired(message="PFA Name is required")
+    name = StringField("Certification Name", [
+        validators.DataRequired(message="Certification Name is required")
     ])
     description = TextAreaField("Description", [
-        validators.Length(20, 1024, message="PFA Description must range from 20-1024 characters"),
+        validators.Length(20, 1024, message="Certification Description must range from 20-1024 characters"),
         validators.DataRequired(message="Description is required")
     ])
     duration = IntegerField("Duration", [
@@ -201,16 +201,16 @@ class addEpaForm(Form):
         validators.DataRequired(message="Duration is required")
     ])
     location = StringField("Location", [
-        validators.DataRequired(message="PFA location is required")
+        validators.DataRequired(message="Certification location is required")
     ])
-    mode = RadioField("PFA Mode", choices=[
+    mode = RadioField("Workshop Mode", choices=[
         ("Virtual", "Virtual Learning"),
         ("Hybrid", "Hybrid"),
         ("Physical", "Physical Meeting")
     ], validators=[
-        validators.DataRequired("PFA course mode is required")
+        validators.DataRequired("workshop course mode is required")
     ])
-    submit = SubmitField("Create PFA")
+    submit = SubmitField("Create Certification")
 
 
 class addAddressForm(Form):
@@ -298,21 +298,23 @@ class connectionForm(Form):
     submit = SubmitField("Start Conversation")
 
 class feedbackForm(Form):
-    q1 = IntegerField("q1", [
+    q1 = IntegerField("How did you find your experience with the counsellor?", [
         validators.NumberRange(1, 5, "Rating must be a range between 1 to 12 hours"),
         validators.DataRequired(message="Rating is required")
     ])
-    q2 = IntegerField("q2", [
+    q2 = IntegerField("How likely are you to recommend this counsellor to another user?", [
         validators.NumberRange(1, 5, "Rating must be a range between 1 to 12 hours"),
         validators.DataRequired(message="Rating is required")
     ])
-    experience_details = TextAreaField("Both positve and negative feeedback appreciated...", [
+    experience_details = TextAreaField("Please provide feedback regarding your experience with this counsellor. Negative and positive feedback welcomed.", [
         validators.Length(20, 1024, message="Experience Feedback Details must range from 20-1024 characters"),
         validators.DataRequired(message="Feedback is required")
     ],render_kw={"placeholder": "Both positve and negative feeedback appreciated..."})
-    comments = TextAreaField("comments", [
+    comments = TextAreaField("Any comments on the EasyAid platform?", [
         validators.Length(20, 1024, message="comments must range from 20-1024 characters"),
     ],render_kw={"placeholder": ""})
+
+    submit = SubmitField("Submit Feedback")
 
 class chatForm(Form):
     connectionId = StringField("Connection ID", [

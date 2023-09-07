@@ -1,73 +1,53 @@
-import logging
 import shelve
-import smtplib
-from datetime import datetime, timedelta
 
-import jwt
-from flask import flash, Blueprint, render_template, request, session, redirect, url_for
-from flask_mail import Message
+from flask import Blueprint, render_template, request, flash, url_for, redirect
 
-import app
-from classes.Feedback import Feedback
 from forms import feedbackForm
-from functions import flashFormErrors, goBack, loginAccess, adminAccess
-
+from functions import loginAccess, adminAccess
+from classes.Feedback import Feedback
 
 feedback = Blueprint("feedback", __name__)
+
 
 # @feedback.route('/feedback/feedback', methods=['GET', 'POST'])
 # @loginAccess
 # def feedbacklist():
 #     with shelve.open()
-@feedback.route('/feedback/feedback/<id>', methods=['GET', 'POST'])
+@feedback.route('/connect/<id>/feedback', methods=['GET', 'POST'])
 @loginAccess
 def feedbacks(id):
-    userDict = {}
-    userDict = session["user"] 
-    useremail = userDict['email']
+    form = feedbackForm(request.form)
+    if request.method == "POST" and form.validate():
+        connect = {}
+        try:
+            with shelve.open("connections") as connections:
+                connect = connections[id]
 
-    with shelve.open("connections") as connections:
-        
-        for connection in connections:
-            if connection.userId == useremail:
-                if connection.feedback == True:
-                    redirect(url_for("/"))
-            
-        form = feedbackForm(request.form)
-        if request.method == "POST" and form.validate():
-            
-            q1 = form.q1.data
-            q2 = form.q2.data
-            experience_details = form.experience_details.data
-            comments = form.comments.data
-            Feedback(useremail,id,q1,q2,experience_details,comments)
+            if connect.status or connect.feedback:
+                flash("Cannot give feedback yet or you already given a feedback previously", category="error")
+                return redirect(url_for("connect.viewConnect"))
 
-            with shelve.open("feedbacks") as feedback:
-                feedback["feedback"] = Feedback
-            flash("Feedback successfully sent!", category="success")
-        for connection in connections:
-            if connection.userId == useremail:
-                connection.feedback == True
-                
-    return render_template("feedback/feedback.html", form=form)
+            feedback = Feedback(connect.userId, connect.councilId, form.q1.data, form.q2.data, form.experience_details.data, form.comments.data)
 
+            with shelve.open("feedbacks") as feedbacks:
+                feedbacks[str(feedback.id)] = feedback
 
-@feedback.route("/feedback/admin/<id>", methods=['GET', 'POST'])
-@adminAccess
-def viewAdminFeedback(id):  #id is admin id
-    feedbackdb = []
-    with shelve.open("feedbacks") as feedbacks:
-        for feedback in feedbacks:
-            if feedback["feedbacks"].get_counselloremail() == id:
-                #only admin can check their own connections
-                useremail = feedback.get_useremail()
-                q1 = feedback.get_q1()
-                q2 = feedback.get_q2()
-                experience_details = feedback.get_experience_details()
-                get_comments = feedback.get_comments()
-                feedbackdb.append({"useremail": useremail,"q1":q1,"q2":q2,"experience_details":experience_details,"get_comments":get_comments})
-    return render_template("feedback/feedbackAdmin.html" ,feedbackdb = feedbackdb)    #change it to the html
+            with shelve.open("connections") as connections:
+                connections[id].feedback = True
 
-            
+            flash("Successfully given feedback to counsellor", category="success")
+            return redirect(url_for("connect.viewConnect"))
+        except KeyError:
+            flash("Cannot find connection with provided ID to provide feedback", category="error")
+            return redirect(url_for("connect.viewConnect"))
+    else:
+        try:
+            with shelve.open("connections") as connections:
+                if connections[id].status or connections[id].feedback:
+                    flash("Cannot give feedback yet or you already given a feedback previously", category="error")
+                    return redirect(url_for("connect.viewConnect"))
 
-           
+                return render_template("feedback/feedback.html", form=form)
+        except KeyError:
+            flash("Cannot find connection with provided ID to provide feedback", category="error")
+            return redirect(url_for("connect.viewConnect"))

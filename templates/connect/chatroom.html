@@ -39,9 +39,11 @@
                         <div class="col-md-6">
                             {{ infoBox.infoBox("Your Nickname", user.nickname) }}
                         </div>
-                        <a href="{{ url_for("home") }}">
-                            <button class="btn btn-danger">End Session</button>
-                        </a>
+                        {% if session["user"]["accountType"] == "customer" %}
+                            <a href="{{ url_for("connect.closeChatroom", id=connect.id) }}">
+                                <button class="btn btn-danger">End Session</button>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

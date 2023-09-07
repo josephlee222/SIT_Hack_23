@@ -162,3 +162,16 @@ def chatroom(id):
         flash("Cannot find connection with provided ID", category="error")
         return redirect(url_for("connect.viewConnect"))
 
+@connect.route("/connect/chat/<id>/close", methods=['GET', 'POST'])
+@loginAccess
+def closeChatroom(id):
+    try:
+        with shelve.open("connections", writeback=True) as connections:
+            connections[id].status = False
+
+        socketio.emit("chat_close", to=int(id))
+
+        return redirect(url_for("feedback.feedbacks", id=id))
+    except KeyError:
+        flash("Cannot find connection with provided ID", category="error")
+        return redirect(url_for("connect.viewConnect"))

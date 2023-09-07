@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}
+    View User Feedbacks
+{% endblock %}
+{% block nav %}
+    {% include "includes/adminNavControls.html" %}
+{% endblock %}
+{% block navRight %}
+    {% include "includes/userControls.html" %}
+{% endblock %}
+{% block content %}
+    <div class="d-flex align-items-center mb-4">
+        <span class="material-icons me-3" style="font-size: 60px">reviews</span>
+        <div>
+            <h1>View Feedbacks</h1>
+            <h6 class="m-0">{{ user.getEmail() }}</h6>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <ul class="nav nav-tabs overflow flex-nowrap">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for("adminUsers.editUser", email=user.getEmail()) }}">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Feedbacks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for("adminUsers.editPassword", email=user.getEmail()) }}">Change Password</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        {% if feedbacks|length > 0 %}
+            {% for feedback in feedbacks %}
+                <div class="col-lg-6">
+                    <div class="card white">
+                        <div class="card-body">
+                            <h5 class="card-title">Review</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ infoBox.infoBox("Counsellor Experience", feedback.q1|string + "/5") }}
+                                </div>
+                                <div class="col-6">
+                                    {{ infoBox.infoBox("Recommendation Scale", feedback.q2|string + "/5") }}
+                                </div>
+                                <div class="col-12">
+                                    {{ infoBox.infoBox("Comments on Counsellor", feedback.experience_details) }}
+                                </div>
+                                <div class="col-12">
+                                    {{ infoBox.infoBox("Comments on EasyAid Service", feedback.comments) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="card white">
+                    <div class="card-body d-flex justify-content-center">
+                        No reviews received for this user
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
