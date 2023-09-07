@@ -10,7 +10,7 @@ from flask_mail import Message
 import app
 from classes.Feedback import Feedback
 from forms import feedbackForm
-from functions import flashFormErrors, goBack, loginAccess
+from functions import flashFormErrors, goBack, loginAccess, adminAccess
 
 
 feedback = Blueprint("feedback", __name__)
@@ -50,3 +50,24 @@ def feedbacks(id):
                 connection.feedback == True
                 
     return render_template("feedback/feedback.html", form=form)
+
+
+@feedback.route("/feedback/admin/<id>", methods=['GET', 'POST'])
+@adminAccess
+def viewAdminFeedback(id):  #id is admin id
+    feedbackdb = []
+    with shelve.open("feedbacks") as feedbacks:
+        for feedback in feedbacks:
+            if feedback["feedbacks"].get_counselloremail() == id:
+                #only admin can check their own connections
+                useremail = feedback.get_useremail()
+                q1 = feedback.get_q1()
+                q2 = feedback.get_q2()
+                experience_details = feedback.get_experience_details()
+                get_comments = feedback.get_comments()
+                feedbackdb.append({"useremail": useremail,"q1":q1,"q2":q2,"experience_details":experience_details,"get_comments":get_comments})
+    return render_template("feedback/feedback.html")    #change it to the html
+
+            
+
+           

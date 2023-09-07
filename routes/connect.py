@@ -39,3 +39,4 @@ def viewConnect():
         print(userList)
 
         return render_template("connect/viewCouncils.html", userList=userList, form=form)
+
