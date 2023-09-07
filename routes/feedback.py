@@ -66,7 +66,7 @@ def viewAdminFeedback(id):  #id is admin id
                 experience_details = feedback.get_experience_details()
                 get_comments = feedback.get_comments()
                 feedbackdb.append({"useremail": useremail,"q1":q1,"q2":q2,"experience_details":experience_details,"get_comments":get_comments})
-    return render_template("feedback/feedback.html")    #change it to the html
+    return render_template("feedback/feedbackAdmin.html" ,feedbackdb = feedbackdb)    #change it to the html
 
             
 

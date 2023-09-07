@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+Feedback Form
+{% endblock %}
+{% block nav %}
+{{ normalNavControls.normalNavControls() }}
+{% endblock %}
+{% block navRight %}
+{% include "includes/userControls.html" %}
+{% endblock %}
+{% block content %}
+
+
+{% for feedback in feedbackdb %}
+<div class="row justify-content-center">
+    <div>
+        {{feedback["useremail"]}}
+    </div>
+    <div>
+        {{feedback["q1"]}}
+    </div>
+    <div>
+        {{feedback["q2"]}}
+    </div>
+    <div>
+        {{feedback["experience_details"]}}
+    </div>
+    <div>
+        {{feedback["get_comments"]}}
+    </div>
+</div>
+
+{%endfor%}
+
+{% endblock %}
