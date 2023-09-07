@@ -22,20 +22,31 @@ feedback = Blueprint("feedback", __name__)
 @feedback.route('/feedback/feedback/<id>', methods=['GET', 'POST'])
 @loginAccess
 def feedbacks(id):
-    
-    form = feedbackForm(request.form)
-    if request.method == "POST" and form.validate():
-        userDict = {}
-        userDict = session["user"] 
-        useremail = userDict['email']
-        q1 = form.q1.data
-        q2 = form.q2.data
-        experience_details = form.experience_details.data
-        comments = form.comments.data
-        Feedback(useremail,id,q1,q2,experience_details,comments)
+    userDict = {}
+    userDict = session["user"] 
+    useremail = userDict['email']
 
-        with shelve.open("feedbacks") as feedback:
-            feedback["feedback"] = Feedback
+    with shelve.open("connections") as connections:
+        
+        for connection in connections:
+            if connection.userId == useremail:
+                if connection.feedback == True:
+                    redirect(url_for("/"))
+            
+        form = feedbackForm(request.form)
+        if request.method == "POST" and form.validate():
+            
+            q1 = form.q1.data
+            q2 = form.q2.data
+            experience_details = form.experience_details.data
+            comments = form.comments.data
+            Feedback(useremail,id,q1,q2,experience_details,comments)
+
+            with shelve.open("feedbacks") as feedback:
+                feedback["feedback"] = Feedback
             flash("Feedback successfully sent!", category="success")
-
+        for connection in connections:
+            if connection.userId == useremail:
+                connection.feedback == True
+                
     return render_template("feedback/feedback.html", form=form)

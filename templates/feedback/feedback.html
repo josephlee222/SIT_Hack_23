@@ -12,26 +12,28 @@
 <form action="#" method="POST">
     <p>How did you find your experience with SafeChameleon228?</p>
     <p>Rate 1-5</p>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center feedback-form">
         {{ formHelper.renderField(form.q1) }}
     </div>    <br><br>
 
     <p>How likely are you to recommend SafeChameleon228 to another user?</p>
     <p>Rate 1-5</p>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center feedback-form">
         {{ formHelper.renderField(form.q2) }}
     </div>
     <br><br>
 
     <p>Please provide feedback regarding your experience with SafeChameleon228</p>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center feedback-form">
         {{ formHelper.renderField(form.experience_details) }}
     </div>
+    <br><br>
 
     <p>Any comments on the EasyAid platform?</p>
-    <div class="d-flex align-items-center">
-        {{ formHelper.renderField(form.comments) }}
+    <div class="d-flex align-items-center feedback-form">
+        {{ formHelper.renderField(form.comments)}}
     </div>
+    <br><br>
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
