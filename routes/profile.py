@@ -37,6 +37,7 @@ def editProfile():
             user.setName(form.name.data)
             user.setBirthday(form.birthday.data)
             user.setPhone(form.phone.data)
+            user.bio = form.bio.data
 
             flash("Your profile has been updated successfully!", category="success")
             return redirect(url_for("profile.viewProfile"))
@@ -46,6 +47,7 @@ def editProfile():
         form.name.data = user.getName()
         form.birthday.data = user.getBirthday()
         form.phone.data = user.getPhone()
+        form.bio.data = user.bio
         return render_template("profile/editProfile.html", form=form, user=user)
 
 

@@ -1,5 +1,5 @@
 from flask import flash
-
+from random_username.generate import generate_username
 from classes.Address import Address
 
 
@@ -7,6 +7,7 @@ class User:
     def __init__(self, name, password, email, accountType, birthday=None, phone=None):
         try:
             self.name = str(name)
+            self.nickname = generate_username()[0]
             self.password = str(password)
             self.email = str(email)
             self.accountType = str(accountType)
@@ -17,8 +18,12 @@ class User:
         self.phone = phone
         self.address = []
         self.hours = 0
-        self.timeRange = []
+        self.timeRange = {
+            "start": 0,
+            "end": 0
+        }
         self.cert = []
+        self.bio = ""
 
     def getName(self):
         return self.name

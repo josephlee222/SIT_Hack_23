@@ -31,6 +31,7 @@ def login():  # put application's code here
                         "accountType": user.getAccountType(),
                         "birthday": user.getBirthday(),
                         "phone": user.getPhone(),
+                        "nickname": user.nickname
                     }
                     session["user"] = userDict
                     print(session["user"])
